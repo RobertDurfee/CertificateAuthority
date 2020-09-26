@@ -23,13 +23,10 @@ const EMAIL_DOMAIN_WHITELIST = [
     'durfee.io',
 ]
 const TRANSPORTER = nodemailer.createTransport({
-    'host': 'smtp.durfee.io',
-    'port': 25,
-    'secure': false,
-    'requireTLS': true,
+    'service': 'gmail',
     'auth': {
-        'user': 'ultron-fg5shgn',
-        'pass': process.env.SMTP_DURFEE_IO_PASSWORD,
+        'user': 'robert.durfee.17@gmail.com',
+        'pass': process.env.GMAIL_APP_PASSWORD,
     },
 })
 const STATUS_CODE_OK = 200
@@ -127,7 +124,7 @@ app.post('/certificateSigningRequests', (req, res) => {
     const now = new Date()
     const verificationCode = uuid()
     TRANSPORTER.sendMail({
-        'from': 'Durfee Certificate Authority <noreply@ca.durfee.io>',
+        'from': 'Durfee Certificate Authority <noreply-ca@durfee.io>',
         'to': subject['emailaddress'],
         'subject': 'Email Verification',
         'text': `Verification code: ${verificationCode}.`,
